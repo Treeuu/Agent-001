@@ -1,0 +1,74 @@
+import random
+
+# Character class to store player's stats
+class Character:
+    def __init__(self, name, health, power, armor):
+        self.name = name
+        self.health = health
+        self.power = power
+        self.armor = armor
+
+    # Returns the attack damage that the character does
+    def attack(self):
+        return self.power
+
+    # Returns the damage that the character takes after armor calculation
+    def take_damage(self, damage):
+        damage_taken = damage - self.armor
+        self.health -= damage_taken
+        if self.health < 0:
+            self.health = 0
+        return self.health
+
+# Monster class for enemies
+class Monster:
+    def __init__(self, name, health, power):
+        self.name = name
+        self.health = health
+        self.power = power
+
+    # Returns the attack damage that the monster does
+    def attack(self):
+        return self.power
+
+# Battle function to handle fighting between player and monster
+def battle(player, monster):
+    while player.health > 0 and monster.health > 0:
+        print(f"{player.name} attacks {monster.name}!")
+        monster.take_damage(player.attack())
+        if monster.health <= 0:
+            print(f"{monster.name} is defeated!")
+            break
+        print(f"{monster.name} attacks {player.name}!")
+        player.take_damage(monster.attack())
+        if player.health <= 0:
+            print(f"{player.name} is defeated!")
+            break
+
+# Set up player character
+player = Character("Player", 100, 20, 5)
+
+# Set up monster list
+monsters = [Monster("Goblin", 30, 10), Monster("Orc", 50, 15), Monster("Troll", 80, 20)]
+
+# Main game loop
+while True:
+    # Choose a monster to fight
+    monster = random.choice(monsters)
+    print(f"A wild {monster.name} appeared!")
+
+    # Start battle
+    battle(player, monster)
+
+    # Check if player is defeated
+    if player.health <= 0:
+        print("Game Over")
+        break
+
+    # Ask player if they want to continue
+    continue_game = input("Do you want to continue? (y/n)")
+    if continue_game.lower() != "y":
+        break
+
+# End game message
+print("Thanks for playing!")
