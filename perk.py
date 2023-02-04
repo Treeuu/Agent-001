@@ -20,7 +20,7 @@ print("/                                 /")
 print("/ result =", res1, res2, res3,   "/")
 print('///////////////////////////////////')
 
-if lesson == "gaben":
+elif lesson == "gaben":
     print("did you want a trick")
 
 
