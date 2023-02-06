@@ -10,3 +10,8 @@ if name == "bob":
 elif name == 'rip':
     for i in range(1, 11):
         print('#'*i)
+elif name == 'lis':
+    a= [a + b for a in'list' if a != 's' for b in 'soup' if b != 'u']
+    print (a)
+elif name == "byte_sis":
+    print(name.__sizeof__())
